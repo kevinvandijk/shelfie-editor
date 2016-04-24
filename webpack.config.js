@@ -14,9 +14,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
 
-  entry: {
-    app: PATHS.app,
-  },
+  entry: ['babel-polyfill', PATHS.app],
 
   output: {
     path: PATHS.build,
