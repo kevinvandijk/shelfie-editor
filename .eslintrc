@@ -5,6 +5,7 @@
       "react"
   ],
   "rules": {
+    "no-param-reassign": 0,
     "react/jsx-curly-spacing": [2, "always"]
   }
 }

@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Kevin van Dijk",
   "devDependencies": {
+    "babel-cli": "^6.7.7",
     "babel-core": "^6.7.7",
     "babel-eslint": "^6.0.3",
     "babel-loader": "^6.2.4",
@@ -36,6 +37,11 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-multer": "^1.0.0",
+    "koa-router": "^7.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-dropzone": "^3.4.0"
