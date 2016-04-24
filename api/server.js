@@ -18,6 +18,10 @@ router.post('/upload', upload.array('file'), ctx => {
   ctx.status = 200;
 });
 
+router.get('/list', ctx => {
+  ctx.body = fs.readdirSync('./uploads');
+});
+
 app
   .use(convert(cors()))
   .use(router.routes())
