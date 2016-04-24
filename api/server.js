@@ -1,5 +1,7 @@
 import Koa from 'koa';
 import KoaRouter from 'koa-router';
+import serve from 'koa-static';
+import mount from 'koa-mount';
 import cors from 'koa-cors';
 import convert from 'koa-convert';
 import multer from 'koa-multer';
@@ -22,8 +24,11 @@ router.get('/list', ctx => {
   ctx.body = fs.readdirSync('./uploads');
 });
 
+const staticServer = serve('./uploads');
+
 app
   .use(convert(cors()))
   .use(router.routes())
   .use(router.allowedMethods())
+  .use(convert(mount('/uploads', staticServer)))
   .listen(3000);
