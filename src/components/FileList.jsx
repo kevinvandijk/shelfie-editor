@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 export default class FileList extends React.Component {
+  static propTypes = {
+    onFileClick: PropTypes.func,
+  };
+
   state = {
     files: null,
   };
@@ -16,11 +20,14 @@ export default class FileList extends React.Component {
     return (
       <div>
         { this.state.files
-          ? this.state.files.map(file => (
-            <li>
-              <a onClick={ this.onFileClick }>{ file }</a>
-            </li>
-          ))
+          ? this.state.files.map(file => {
+            const clickHandler = this.props.onFileClick.bind(this, file);
+            return (
+              <li key={ file }>
+                <a onClick={ clickHandler }>{ file }</a>
+              </li>
+            );
+          })
           : <li>Loading filelist...</li>
         }
       </div>
