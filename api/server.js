@@ -5,6 +5,7 @@ import mount from 'koa-mount';
 import cors from 'koa-cors';
 import convert from 'koa-convert';
 import multer from 'koa-multer';
+import bodyParser from 'koa-bodyparser';
 import fs from 'fs';
 
 const router = new KoaRouter();
@@ -24,9 +25,14 @@ router.get('/list', ctx => {
   ctx.body = fs.readdirSync('./uploads');
 });
 
+router.post('/cut', ctx => {
+  ctx.body = ctx.request.body;
+});
+
 const staticServer = serve('./uploads');
 
 app
+  .use(convert(bodyParser()))
   .use(convert(cors()))
   .use(router.routes())
   .use(router.allowedMethods())

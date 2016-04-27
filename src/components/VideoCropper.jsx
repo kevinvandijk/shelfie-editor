@@ -25,11 +25,24 @@ export default class VideoCropper extends React.Component {
   }
 
   onCutEnd = () => {
-    const { duration, played } = this.state;
+    const { duration, played, cutStart } = this.state;
     const cutEnd = duration * played;
     this.setState({
       cutEnd,
       playing: false,
+    });
+
+    fetch('http://127.0.0.1:3000/cut', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cutStart,
+        cutEnd,
+        file: this.props.name,
+      }),
     });
   }
 
