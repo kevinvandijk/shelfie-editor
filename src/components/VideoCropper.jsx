@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactPlayer from 'react-player';
+import Download from './Download';
 
 export default class VideoCropper extends React.Component {
   static propTypes = {
@@ -24,7 +25,7 @@ export default class VideoCropper extends React.Component {
     this.setState({ cutStart });
   }
 
-  onCutEnd = () => {
+  onCutEnd = async () => {
     const { duration, played, cutStart } = this.state;
     const cutEnd = duration * played;
     this.setState({
@@ -32,7 +33,7 @@ export default class VideoCropper extends React.Component {
       playing: false,
     });
 
-    fetch('http://127.0.0.1:3000/cut', {
+    const result = await (await fetch('http://127.0.0.1:3000/cut', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -43,6 +44,10 @@ export default class VideoCropper extends React.Component {
         cutEnd,
         file: this.props.name,
       }),
+    })).json();
+
+    this.setState({
+      output: result.output,
     });
   }
 
@@ -53,7 +58,7 @@ export default class VideoCropper extends React.Component {
   }
 
   render() {
-    const { playing, played, cutStart, cutEnd } = this.state;
+    const { playing, played, cutStart, cutEnd, output } = this.state;
 
     return (
       <div>
@@ -76,10 +81,12 @@ export default class VideoCropper extends React.Component {
         { typeof cutStart !== 'undefined' &&
           <button
             onClick={ this.onCutEnd }
-            disabled={ typeof cutEnd !== 'undefined' }
           >
             Cut{ cutEnd ? ` (${cutEnd})` : '' }
           </button>
+        }
+        { typeof output !== 'undefined' &&
+          <Download file={ `http://127.0.0.1:3000/${output}` } />
         }
         <input
           type="range"
