@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack",
-    "start": "./node_modules/.bin/webpack-dev-server",
+    "start": "./node_modules/.bin/babel-node ./api/server.js | ./node_modules/.bin/webpack-dev-server",
     "lint": "./node_modules/.bin/eslint . --ext .js --ext .jsx"
   },
   "dependencies": {
