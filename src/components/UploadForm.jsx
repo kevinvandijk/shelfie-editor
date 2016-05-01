@@ -43,30 +43,43 @@ class UploadForm extends React.Component {
   render() {
     return (
       <div>
-        { !this.state.uploadStatus &&
-          <Dropzone onDrop={ this.onDrop }>
-            <div>Drop a video to upload</div>
-          </Dropzone>
-        }
-        { this.state.files &&
-          <div>
-            <h2>Files:</h2>
-            <ul className="list-group">
-              {
-                this.state.files.map(file =>
-                  <li className="list-group-item" key={ file.name }>{ file.name }</li>
-                )
-              }
-            </ul>
-            <button className="btn btn-primary" onClick={ this.onSubmit }>Upload</button>
+        <div className="row">
+          { this.state.uploadStatus === 'success' &&
+            <div className="col-lg-12">
+              <div className="alert alert-success">Upload successful</div>
+            </div>
+          }
+          { this.state.uploadStatus === 'error' &&
+            <strong>OHNOES it went wrong</strong>
+          }
+        </div>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="panel panel-primary">
+              <div className="panel-heading">Upload a video</div>
+              <Dropzone onDrop={ this.onDrop }>
+                <div>Drag and drop a video to upload</div>
+              </Dropzone>
+            </div>
           </div>
-        }
-        { this.state.uploadStatus === 'success' &&
-          <div className="alert alert-success">Upload successful</div>
-        }
-        { this.state.uploadStatus === 'error' &&
-          <strong>OHNOES it went wrong</strong>
-        }
+          <div className="col-lg-6">
+            { this.state.files &&
+              <div className="panel panel-info">
+                <div className="panel-heading">Files to upload:</div>
+                <ul className="list-group">
+                  {
+                    this.state.files.map(file =>
+                      <li className="list-group-item" key={ file.name }>{ file.name }</li>
+                    )
+                  }
+                </ul>
+                <div className="panel-footer">
+                  <button className="btn btn-primary" onClick={ this.onSubmit }>Upload</button>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
       </div>
     );
   }

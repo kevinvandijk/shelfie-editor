@@ -18,14 +18,17 @@ export default class FileList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="list-group">
+        <div className="list-group-item">
+          <h4 className="list-group-item-heading">File list</h4>
+        </div>
         { this.state.files
           ? this.state.files.map(file => {
             const clickHandler = this.props.onFileClick.bind(this, file);
             return (
-              <li key={ file }>
-                <a onClick={ clickHandler }>{ file }</a>
-              </li>
+              <a href="#" key={ file } className="list-group-item" onClick={ clickHandler }>
+                { file }
+              </a>
             );
           })
           : <li>Loading filelist...</li>

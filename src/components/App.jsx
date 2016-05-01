@@ -24,23 +24,24 @@ export default class App extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-default">
+          <div className="navbar-header">
+            <span className="navbar-brand">Shelfie Editor</span>
+          </div>
           <ul className="nav navbar-nav">
-            <li><a href="#" onClick={ () => this.setState({ page: 'upload' }) }>Upload</a></li>
-            <li><a href="#" onClick={ () => this.setState({ page: 'files' }) }>File list</a></li>
+            <li className={ page === 'upload' ? 'active' : null }>
+              <a href="#" onClick={ () => this.setState({ page: 'upload' }) }>Upload</a>
+            </li>
+            <li className={ page === 'files' ? 'active' : null }>
+              <a href="#" onClick={ () => this.setState({ page: 'files' }) }>File list</a>
+            </li>
           </ul>
         </nav>
         { page === 'upload' &&
-          <div className="container">
-            <h2>Upload</h2>
-            <UploadForm />
-          </div>
+          <UploadForm />
         }
 
         { page === 'files' &&
-          <div className="container">
-            <h2>Files</h2>
-            <FileList onFileClick={ this.openFile } />
-          </div>
+          <FileList onFileClick={ this.openFile } />
         }
 
         { page === 'video' && this.state.videoUrl
