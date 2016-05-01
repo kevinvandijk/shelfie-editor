@@ -43,20 +43,26 @@ class UploadForm extends React.Component {
   render() {
     return (
       <div>
-        <Dropzone onDrop={ this.onDrop }>
-          <div>Drop a video to upload</div>
-        </Dropzone>
+        { !this.state.uploadStatus &&
+          <Dropzone onDrop={ this.onDrop }>
+            <div>Drop a video to upload</div>
+          </Dropzone>
+        }
         { this.state.files &&
           <div>
             <h2>Files:</h2>
-            <ul>
-              { this.state.files.map(file => <li>{ file.name }</li>) }
+            <ul className="list-group">
+              {
+                this.state.files.map(file =>
+                  <li className="list-group-item" key={ file.name }>{ file.name }</li>
+                )
+              }
             </ul>
-            <button onClick={ this.onSubmit }>Upload</button>
+            <button className="btn btn-primary" onClick={ this.onSubmit }>Upload</button>
           </div>
         }
         { this.state.uploadStatus === 'success' &&
-          <strong>Done</strong>
+          <div className="alert alert-success">Upload successful</div>
         }
         { this.state.uploadStatus === 'error' &&
           <strong>OHNOES it went wrong</strong>
