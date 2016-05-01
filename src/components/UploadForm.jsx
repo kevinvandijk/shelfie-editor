@@ -45,12 +45,16 @@ class UploadForm extends React.Component {
       <div>
         <div className="row">
           { this.state.uploadStatus === 'success' &&
+            !this.state.files &&
             <div className="col-lg-12">
               <div className="alert alert-success">Upload successful</div>
             </div>
           }
           { this.state.uploadStatus === 'error' &&
-            <strong>OHNOES it went wrong</strong>
+            !this.state.files &&
+            <div className="col-lg-12">
+              <div className="alert alert-danger">OHNOES it went wrong :(</div>
+            </div>
           }
         </div>
         <div className="row">
