@@ -48,4 +48,4 @@ Child html-webpack-plugin for "index.html":
 webpack: bundle is now VALID.
 ```
 
-Once you see the 'bundle is now VALID' message, open a browser and browse to [http://localhost:4000](http://localhost:4000).
+Once you see the 'bundle is now VALID' message,  open a browser and browse to [http://localhost:4000](http://localhost:4000).
